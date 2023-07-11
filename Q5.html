@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    button[type="reset"] {
+      background-color: #f44336;
+    }
+    
+    .output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: none;
+    }
+    
+    .output-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .output-content {
+      margin-bottom: 5px;
+    }
+  </style>
+  <script>
+    function showOutput() {
+      var name = document.getElementById("name").value;
+      var gender = document.querySelector('input[name="gender"]:checked').value;
+      var course = document.getElementById("course").value;
+      var subjects = [];
+      var checkboxes = document.getElementsByName("subjects");
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          subjects.push(checkboxes[i].value);
+        }
+      }
+      
+      var outputContainer = document.getElementById("output-container");
+      var outputTitle = document.getElementById("output-title");
+      var outputContent = document.getElementById("output-content");
+      
+      outputTitle.innerText = "Registration Details";
+      outputContent.innerHTML = "Name: " + name + "<br>" +
+                                "Gender: " + gender + "<br>" +
+                                "Course: " + course + "<br>" +
+                                "Subjects: " + subjects.join(", ");
+      
+      outputContainer.style.display = "block";
+    }
+    
+    function resetForm() {
+      document.getElementById("registration-form").reset();
+      document.getElementById("output-container").style.display = "none";
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Student Registration Form</h2>
+    
+    <form id="registration-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <label><input type="radio" name="gender" value="Male" required> Male</label>
+        <label><input type="radio" name="gender" value="Female"> Female</label>
+      </div>
+      
+      <div class="form-group">
+        <label for="course">Course:</label>
+        <select id="course" name="course" required>
+          <option value="">-- Select Course --</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Medical">Medical</option>
+          <option value="Arts">Arts</option>
+          <option value="Commerce">Commerce</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Subjects:</label>
+        <label><input type="checkbox" name="subjects" value="Mathematics"> Mathematics</label>
+        <label><input type="checkbox" name="subjects" value="Physics"> Physics</label>
+        <label><input type="checkbox" name="subjects" value="Chemistry"> Chemistry</label>
+        <label><input type="checkbox" name="subjects" value="Biology"> Biology</label>
+      </div>
+      
+      <div class="form-group">
+        <button type="button" onclick="showOutput()">Submit</button>
+        <button type="reset" onclick="resetForm()">Reset</button>
+      </div>
+    </form>
+    
+    <div id="output-container" class="output">
+      <h3 id="output-title" class="output-title"></h3>
+      <div id="output-content" class="output-content"></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    button[type="reset"] {
+      background-color: #f44336;
+    }
+    
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+  <script>
+    function validateForm() {
+      var rollNumber = document.getElementById("rollNumber").value;
+      var name = document.getElementById("name").value;
+      var dob = document.getElementById("dob").value;
+      var gender = document.querySelector('input[name="gender"]:checked');
+      var subjects = document.querySelectorAll('input[name="subjects"]:checked');
+      
+      var errors = [];
+      
+      // Roll Number validation
+      if (!/^\d{7}$/.test(rollNumber)) {
+        errors.push("Roll Number should be a 7-digit numeric value");
+      }
+      
+      // Name validation
+      if (!/^[A-Za-z]+$/.test(name)) {
+        errors.push("Name should contain only alphabetical characters");
+      }
+      
+      // DOB validation
+      if (dob === "") {
+        errors.push("DOB is a required field");
+      }
+      
+      // Gender validation
+      if (gender === null) {
+        errors.push("Gender is a required field");
+      }
+      
+      // Subjects validation
+      if (subjects.length === 0) {
+        errors.push("At least one subject must be selected");
+      }
+      
+      // Display errors or submit form
+      var errorContainer = document.getElementById("error-container");
+      if (errors.length > 0) {
+        errorContainer.innerHTML = errors.join("<br>");
+      } else {
+        errorContainer.innerHTML = "";
+        document.getElementById("registration-form").submit();
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Student Registration Form</h2>
+    
+    <form id="registration-form" onsubmit="event.preventDefault(); validateForm();">
+      <div class="form-group">
+        <label for="rollNumber">Roll Number:</label>
+        <input type="text" id="rollNumber" name="rollNumber" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="text" id="dob" name="dob" placeholder="YYYY-MM-DD" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Gender:</label>
+        <label><input type="radio" name="gender" value="Male" required> Male</label>
+        <label><input type="radio" name="gender" value="Female"> Female</label>
+      </div>
+      
+      <div class="form-group">
+        <label>Subjects:</label>
+        <label><input type="checkbox" name="subjects" value="Mathematics"> Mathematics</label>
+        <label><input type="checkbox" name="subjects" value="Physics"> Physics</label>
+        <label><input type="checkbox" name="subjects" value="Chemistry"> Chemistry</label>
+        <label><input type="checkbox" name="subjects" value="Biology"> Biology</label>
+      </div>
+      
+      <div class="form-group">
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+      </div>
+      
+      <div id="error-container" class="error"></div>
+    </form>
+  </div>
+</body>
+</html>

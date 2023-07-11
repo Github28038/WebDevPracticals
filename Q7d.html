@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sum and Average</title>
+</head>
+<body>
+  <button onclick="calculateSumAndAverage()">Enter Numbers</button>
+  
+  <script>
+    function calculateSumAndAverage() {
+      var numbers = [];
+      var input;
+      
+      do {
+        input = parseInt(prompt("Enter a positive number (enter 0 to stop):"));
+        
+        if (input > 0) {
+          numbers.push(input);
+        }
+      } while (input !== 0);
+      
+      var sum = 0;
+      for (var i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+      }
+      
+      var average = sum / numbers.length;
+      
+      alert("Sum: " + sum + "\nAverage: " + average);
+    }
+  </script>
+</body>
+</html>
